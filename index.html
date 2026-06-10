@@ -1,19 +1,103 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ESCALATOR Demo</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <h1>🚆 ESCALATOR Demo</h1>
-  <p id="balance">Balance: 1000 coins</p>
-  <h2 id="multiplier">1.00×</h2>
-  <p id="message">Click “Start” to begin</p>
-  <button onclick="startRound()">Start</button>
-  <button onclick="cashOut()">Cash Out</button>
+<meta charset="UTF-8">
+<title>ESCALATOR</title>
 
-  <script src="game.js"></script>
+<style>
+
+body{
+background:#111;
+color:white;
+font-family:Arial;
+text-align:center;
+margin-top:50px;
+}
+
+#train{
+font-size:70px;
+position:relative;
+left:0px;
+}
+
+#multiplier{
+font-size:50px;
+color:#00ff88;
+margin:20px;
+}
+
+button{
+padding:15px 30px;
+font-size:20px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🚆 ESCALATOR</h1>
+
+<div id="multiplier">1.00×</div>
+
+<div id="train">🚆</div>
+
+<br>
+
+<button onclick="startGame()">START</button>
+
+<script>
+
+let multiplier = 1.00;
+let trainPosition = 0;
+let running = false;
+
+function startGame(){
+
+if(running) return;
+
+running = true;
+
+multiplier = 1.00;
+trainPosition = 0;
+
+let train =
+document.getElementById("train");
+
+let display =
+document.getElementById("multiplier");
+
+let interval = setInterval(()=>{
+
+multiplier += 0.01;
+
+display.innerHTML =
+multiplier.toFixed(2) + "×";
+
+trainPosition += 5;
+
+train.style.left =
+trainPosition + "px";
+
+if(multiplier >= 5){
+
+clearInterval(interval);
+
+display.innerHTML =
+"💥 TRAIN STOPPED AT 5.00×";
+
+running = false;
+
+}
+
+},100);
+
+}
+
+</script>
+
 </body>
 </html>
