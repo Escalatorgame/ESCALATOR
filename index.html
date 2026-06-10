@@ -1,102 +1,153 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>ESCALATOR</title>
 
 <style>
-
-body{
-background:#111;
-color:white;
-font-family:Arial;
-text-align:center;
-margin-top:50px;
+body {
+    margin: 0;
+    padding: 0;
+    background: radial-gradient(#1a1a1a, #000);
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    color: white;
 }
 
-#train{
-font-size:70px;
-position:relative;
-left:0px;
+/* TITLE */
+#title {
+    position: absolute;
+    top: 40px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    letter-spacing: 3px;
 }
 
-#multiplier{
-font-size:50px;
-color:#00ff88;
-margin:20px;
+/* MULTIPLIER */
+#multiplier {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    text-align: center;
+    font-size: 60px;
+    color: #00ff88;
 }
 
-button{
-padding:15px 30px;
-font-size:20px;
-border:none;
-border-radius:10px;
-cursor:pointer;
+/* TRAIN */
+#train {
+    position: absolute;
+    bottom: 120px;
+    left: -200px;
+    font-size: 80px;
+    transition: transform 0.1s linear;
 }
 
+/* ROAD */
+#track {
+    position: absolute;
+    bottom: 100px;
+    width: 200%;
+    height: 5px;
+    background: linear-gradient(to right, #444, #888, #444);
+}
+
+/* PLAY BUTTON */
+#playBtn {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 50px;
+    font-size: 22px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    background: gold;
+    color: black;
+    font-weight: bold;
+}
+
+#playBtn:hover {
+    background: #ffd700;
+}
+
+/* hidden class */
+.hidden {
+    display: none;
+}
 </style>
 </head>
 
 <body>
 
-<h1>🚆 ESCALATOR</h1>
+<div id="title">🚆 ESCALATOR</div>
 
 <div id="multiplier">1.00×</div>
 
+<button id="playBtn" onclick="startGame()">PLAY</button>
+
+<div id="track"></div>
+
 <div id="train">🚆</div>
 
-<br>
-
-<button onclick="startGame()">START</button>
-
 <script>
-
-let multiplier = 1.00;
-let trainPosition = 0;
+let multiplier = 1.0;
+let trainX = -200;
 let running = false;
+let interval;
 
-function startGame(){
+const train = document.getElementById("train");
+const display = document.getElementById("multiplier");
+const playBtn = document.getElementById("playBtn");
 
-if(running) return;
+function animateTrain() {
+    trainX += 6;
+    train.style.left = trainX + "px";
 
-running = true;
-
-multiplier = 1.00;
-trainPosition = 0;
-
-let train =
-document.getElementById("train");
-
-let display =
-document.getElementById("multiplier");
-
-let interval = setInterval(()=>{
-
-multiplier += 0.01;
-
-display.innerHTML =
-multiplier.toFixed(2) + "×";
-
-trainPosition += 5;
-
-train.style.left =
-trainPosition + "px";
-
-if(multiplier >= 5){
-
-clearInterval(interval);
-
-display.innerHTML =
-"💥 TRAIN STOPPED AT 5.00×";
-
-running = false;
-
+    // reset loop (infinite motion feel)
+    if (trainX > window.innerWidth + 200) {
+        trainX = -200;
+    }
 }
 
-},100);
+function startGame() {
+    if (running) return;
 
+    running = true;
+    playBtn.classList.add("hidden");
+
+    multiplier = 1.0;
+
+    interval = setInterval(() => {
+        multiplier += 0.01;
+        display.innerHTML = multiplier.toFixed(2) + "×";
+
+        animateTrain();
+
+        // crash condition (demo)
+        if (multiplier >= 5) {
+            clearInterval(interval);
+            running = false;
+            display.innerHTML = "💥 STOPPED AT 5.00×";
+
+            setTimeout(() => {
+                playBtn.classList.remove("hidden");
+                display.innerHTML = "1.00×";
+                trainX = -200;
+                train.style.left = trainX + "px";
+            }, 2000);
+        }
+
+    }, 80);
 }
 
+/* TRAIN MOVES EVEN BEFORE GAME STARTS */
+setInterval(() => {
+    if (!running) {
+        animateTrain();
+    }
+}, 50);
 </script>
 
 </body>
