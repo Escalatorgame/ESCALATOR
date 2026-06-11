@@ -8,10 +8,16 @@
 
 <style>
 
-body{
+*{
     margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
     overflow:hidden;
-    background:black;
+    background:#000;
+    font-family:Arial, sans-serif;
 }
 
 .container{
@@ -20,83 +26,83 @@ body{
     height:100vh;
 }
 
+/* Background Image */
 .background{
     width:100%;
     height:100%;
     object-fit:cover;
 }
 
-#train{
-    position:absolute;
-    width:120px;
-
-    top:180px;
-    left:60%;
-
-    animation:trainMove 8s linear infinite;
-}
-
+/* PLAY Button */
 .play-btn{
+
     position:absolute;
 
-    left:25%;
+    left:23%;
     top:58%;
 
-    width:320px;
+    width:350px;
     height:90px;
 
     border:none;
     border-radius:12px;
 
-    font-size:50px;
+    background:linear-gradient(
+        to bottom,
+        #f0c96a,
+        #c48b2c
+    );
+
+    color:#000;
+
+    font-size:48px;
     font-weight:bold;
 
     cursor:pointer;
 
-    background:gold;
+    box-shadow:
+    0 0 20px rgba(255,200,80,.4);
+
+    transition:.3s;
+
 }
 
-@keyframes trainMove{
+.play-btn:hover{
 
-    0%{
-        transform:
-        translate(-150px,-50px)
-        scale(.2);
-    }
-
-    100%{
-        transform:
-        translate(400px,400px)
-        scale(1.5);
-    }
+    transform:scale(1.05);
 
 }
 
 </style>
-
 </head>
 <body>
 
 <div class="container">
 
-<img
+    <!-- Your uploaded image -->
+    <img
+    src="FF8CFF71-B0F7-4C66-A955-B7CCFEA8F124.jpeg"
+    class="background"
+    alt="ESCALATOR">
 
-src="071E222C-B0FE-45F5-9301-3A7534D99D94.png"
-class="background"
-alt="background">
-
-<img
-src="IMG_0245.jpeg"
-id="train"
-alt="train">
-
-<button
-class="play-btn"
-onclick="alert('Game Starting')">
-PLAY
-</button>
+    <!-- Play Button -->
+    <button
+    class="play-btn"
+    onclick="startGame()">
+    PLAY
+    </button>
 
 </div>
+
+<script>
+
+function startGame(){
+
+    window.location.href="game.html";
+
+}
+
+</script>
 
 </body>
 </html>
