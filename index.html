@@ -30,13 +30,17 @@ body{
 
     background-image:url('D78BC78F-4911-4795-8DB1-C2C3F2214310.png');
     background-repeat:no-repeat;
-    background-position:center center;
+
+    /* Moves image upward */
+    background-position:center -50px;
+
+    /* Keeps entire image visible */
     background-size:contain;
 
     background-color:#000;
 }
 
-/* Invisible clickable PLAY area */
+/* Invisible clickable area over PLAY button */
 .play-link{
     position:absolute;
 
@@ -57,7 +61,7 @@ body{
 
 <div class="container">
 
-    <!-- Invisible clickable area over PLAY button -->
+    <!-- Clickable PLAY area -->
     <a href="game.html" class="play-link"></a>
 
 </div>
