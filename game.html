@@ -16,142 +16,202 @@
 }
 
 body{
-    background:#121212;
-    color:white;
-    height:100vh;
+
+    min-height:100vh;
+
+    background-image:url('photo-output.png');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+
     display:flex;
     flex-direction:column;
+
+    color:white;
 }
 
-/* Header */
+/* Dark overlay */
 
-.header{
-    text-align:center;
-    padding:15px;
-    font-size:28px;
-    font-weight:bold;
-    color:#d4af37;
-    background:#1a1a1a;
+body::before{
+
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,.45);
+
+    z-index:-1;
 }
 
-/* Game Area */
+/* GAME BOX */
 
-.game-area{
-    flex:1;
-    position:relative;
+.game-box{
+
+    width:95%;
+    max-width:900px;
+
+    height:320px;
+
+    margin:20px auto;
+
+    border-radius:20px;
+
     overflow:hidden;
-    background:#181818;
+
+    position:relative;
+
+    border:2px solid rgba(255,255,255,.1);
+
+    background:
+    radial-gradient(circle at center,
+    rgba(40,140,220,.8),
+    rgba(0,0,0,.95));
+
 }
 
-/* Grid Background */
+/* Rays */
 
-.grid{
+.game-box::before{
+
+    content:"";
+
     position:absolute;
-    width:100%;
-    height:100%;
+    inset:0;
 
-    background-image:
-    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+    background:
+    repeating-conic-gradient(
+    from 180deg,
+    rgba(255,255,255,.04) 0deg,
+    rgba(255,255,255,.04) 8deg,
+    transparent 8deg,
+    transparent 16deg);
 
-    background-size:40px 40px;
 }
 
 /* Multiplier */
 
 .multiplier{
-    position:absolute;
-    top:35%;
-    width:100%;
-    text-align:center;
 
-    font-size:70px;
+    position:absolute;
+
+    top:50%;
+    left:50%;
+
+    transform:
+    translate(-50%,-50%);
+
+    font-size:90px;
+
     font-weight:bold;
-    color:#ffd700;
 
     z-index:5;
-}
-
-/* Train */
-
-.train{
-    position:absolute;
-
-    left:20px;
-    bottom:120px;
-
-    font-size:70px;
-
-    animation: moveTrain 12s linear infinite;
-}
-
-@keyframes moveTrain{
-
-    0%{
-        left:20px;
-        bottom:120px;
-    }
-
-    100%{
-        left:85%;
-        bottom:70%;
-    }
-
 }
 
 /* Controls */
 
 .controls{
-    background:#1a1a1a;
-    padding:15px;
+
+    width:95%;
+    max-width:900px;
+
+    margin:auto auto 20px;
+
+    background:rgba(15,15,15,.95);
+
+    border-radius:20px;
+
+    padding:20px;
+
+    border:1px solid rgba(255,255,255,.08);
 }
 
-.bet-input{
-    width:100%;
-    padding:15px;
-    border:none;
-    border-radius:10px;
-    margin-bottom:10px;
-    font-size:18px;
+.bet-tabs{
+
+    display:flex;
+
+    margin-bottom:15px;
+
+    overflow:hidden;
+
+    border-radius:12px;
+
+    background:#111;
 }
 
-.bet-btn,
-.cashout-btn{
+.bet-tabs button{
 
-    width:100%;
+    flex:1;
+
     padding:15px;
 
     border:none;
-    border-radius:10px;
+
+    background:none;
+
+    color:white;
 
     font-size:20px;
-    font-weight:bold;
+}
+
+.bet-tabs .active{
+
+    background:#222;
+
+    color:#d4af37;
+}
+
+.bet-row{
+
+    display:flex;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+.bet-row input{
+
+    flex:1;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    font-size:24px;
+
+    text-align:center;
+}
+
+.bet-button{
+
+    width:100%;
+
+    padding:25px;
+
+    border:none;
+
+    border-radius:15px;
+
+    background:#16b000;
+
+    color:white;
+
+    font-size:38px;
 
     cursor:pointer;
 }
 
-.bet-btn{
-    background:#d4af37;
-    color:black;
-    margin-bottom:10px;
-}
+.bet-button span{
 
-.cashout-btn{
-    background:#28a745;
-    color:white;
+    display:block;
+    font-size:20px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="header">
-ESCALATOR
-</div>
-
-<div class="game-area">
-
-    <div class="grid"></div>
+<div class="game-box">
 
     <div
     class="multiplier"
@@ -159,27 +219,38 @@ ESCALATOR
     1.00x
     </div>
 
-    <div class="train">
-        🚆
-    </div>
-
 </div>
 
 <div class="controls">
 
-    <input
-    class="bet-input"
-    type="number"
-    placeholder="Enter Bet Amount">
+    <div class="bet-tabs">
 
-    <button
-    class="bet-btn">
-    PLACE BET
-    </button>
+        <button class="active">
+        Bet
+        </button>
 
-    <button
-    class="cashout-btn">
-    CASH OUT
+        <button>
+        Auto
+        </button>
+
+    </div>
+
+    <div class="bet-row">
+
+        <input
+        type="number"
+        value="50.00">
+
+    </div>
+
+    <button class="bet-button">
+
+        Bet
+
+        <span>
+        50.00 NGN
+        </span>
+
     </button>
 
 </div>
