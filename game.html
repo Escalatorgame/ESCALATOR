@@ -22,6 +22,12 @@ body{
     overflow:hidden;
 }
 
+.container{
+    position:relative;
+    width:100%;
+    height:100vh;
+}
+
 .game-image{
     width:100%;
     height:100vh;
@@ -29,14 +35,35 @@ body{
     display:block;
 }
 
+/* Invisible BACK button over the < arrow */
+
+.back-button{
+    position:absolute;
+
+    top:6%;
+    left:1%;
+
+    width:80px;
+    height:80px;
+
+    z-index:1000;
+}
+
 </style>
 </head>
 <body>
 
-<img
-src="IMG_0284.jpeg"
-class="game-image"
-alt="ESCALATOR GAME">
+<div class="container">
+
+    <img
+    src="IMG_0284.jpeg"
+    class="game-image"
+    alt="ESCALATOR GAME">
+
+    <!-- Invisible clickable area -->
+    <a href="index.html" class="back-button"></a>
+
+</div>
 
 </body>
 </html>
