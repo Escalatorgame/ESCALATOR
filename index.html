@@ -1,41 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESCALATOR</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css">
+<title>ESCALATOR</title>
+
+<style>
+
+body{
+    margin:0;
+    overflow:hidden;
+    background:black;
+}
+
+.container{
+    position:relative;
+    width:100vw;
+    height:100vh;
+}
+
+.background{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+#train{
+    position:absolute;
+    width:120px;
+
+    top:180px;
+    left:60%;
+
+    animation:trainMove 8s linear infinite;
+}
+
+.play-btn{
+    position:absolute;
+
+    left:25%;
+    top:58%;
+
+    width:320px;
+    height:90px;
+
+    border:none;
+    border-radius:12px;
+
+    font-size:50px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    background:gold;
+}
+
+@keyframes trainMove{
+
+    0%{
+        transform:
+        translate(-150px,-50px)
+        scale(.2);
+    }
+
+    100%{
+        transform:
+        translate(400px,400px)
+        scale(1.5);
+    }
+
+}
+
+</style>
+
 </head>
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <!-- Background Image -->
-        <img
-            src="assets/escalator-bg.png"
-            alt="Escalator Background"
-            class="background"
-        >
+<img
+src="BACKGROUND_IMAGE_URL"
+class="background"
+alt="background">
 
-        <!-- Moving Train -->
-        <img
-            src="assets/train.png"
-            alt="Train"
-            id="train"
-        >
+<img
+src="TRAIN_IMAGE_URL"
+id="train"
+alt="train">
 
-        <!-- Play Button -->
-        <button
-            class="play-btn"
-            onclick="startGame()"
-        >
-            PLAY
-        </button>
+<button
+class="play-btn"
+onclick="alert('Game Starting')">
+PLAY
+</button>
 
-    </div>
-
-    <script src="js/script.js"></script>
+</div>
 
 </body>
 </html>
