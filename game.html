@@ -12,248 +12,31 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:Arial,sans-serif;
 }
 
+html,
 body{
-    min-height:100vh;
-
-    background-image:url('IMG_0265.jpeg');
-    background-size:cover;
-    background-position:center;
-    background-repeat:no-repeat;
-
-    color:white;
-}
-
-/* MULTIPLIER BOX */
-
-.game-box{
-
-    width:95%;
-    max-width:620px;
-
-    height:180px;
-
-    margin:230px 0 20px 10px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-radius:15px;
-
-    border:2px solid rgba(255,255,255,.1);
-
-    background:
-    radial-gradient(circle,
-    rgba(50,150,255,.8),
-    rgba(0,0,0,.95));
-}
-
-/* Rays */
-
-.game-box::before{
-
-    content:"";
-
-    position:absolute;
-    inset:0;
-
-    background:
-    repeating-conic-gradient(
-    from 180deg,
-    rgba(255,255,255,.05) 0deg,
-    rgba(255,255,255,.05) 10deg,
-    transparent 10deg,
-    transparent 20deg
-    );
-}
-
-/* MULTIPLIER */
-
-.multiplier{
-
-    position:absolute;
-
-    top:50%;
-    left:50%;
-
-    transform:translate(-50%,-50%);
-
-    font-size:70px;
-
-    font-weight:bold;
-
-    color:white;
-
-    z-index:5;
-
-    text-shadow:
-    0 0 20px rgba(255,255,255,.6);
-}
-
-/* BET PANEL */
-
-.controls{
-
-    width:95%;
-    max-width:720px;
-
-    margin-left:10px;
-
-    background:rgba(10,10,10,.95);
-
-    border-radius:20px;
-
-    padding:20px;
-
-    border:1px solid rgba(255,255,255,.08);
-}
-
-.bet-tabs{
-
-    display:flex;
-
-    margin-bottom:15px;
-
-    border-radius:12px;
-
-    overflow:hidden;
-
-    background:#111;
-}
-
-.bet-tabs button{
-
-    flex:1;
-
-    padding:15px;
-
-    border:none;
-
-    background:none;
-
-    color:white;
-
-    font-size:20px;
-}
-
-.bet-tabs .active{
-
-    color:#d4af37;
-}
-
-.bet-row{
-
-    margin-bottom:15px;
-}
-
-.bet-row input{
-
     width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:10px;
-
-    text-align:center;
-
-    font-size:24px;
+    height:100%;
+    background:#000;
+    overflow:hidden;
 }
 
-.bet-button{
-
+.game-image{
     width:100%;
-
-    padding:22px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:#15b100;
-
-    color:white;
-
-    font-size:38px;
-
-    cursor:pointer;
-}
-
-.bet-button span{
-
+    height:100vh;
+    object-fit:contain;
     display:block;
-
-    font-size:20px;
-
-    margin-top:5px;
 }
 
 </style>
 </head>
 <body>
 
-<div class="game-box">
-
-    <div
-    class="multiplier"
-    id="multiplier">
-    1.00x
-    </div>
-
-</div>
-
-<div class="controls">
-
-    <div class="bet-tabs">
-
-        <button class="active">
-        Bet
-        </button>
-
-        <button>
-        Auto
-        </button>
-
-    </div>
-
-    <div class="bet-row">
-
-        <input
-        type="number"
-        value="50.00">
-
-    </div>
-
-    <button class="bet-button">
-
-        Bet
-
-        <span>
-        50.00 NGN
-        </span>
-
-    </button>
-
-</div>
-
-<script>
-
-let multiplier = 1.00;
-
-setInterval(() => {
-
-    multiplier += 0.01;
-
-    document.getElementById("multiplier").innerText =
-    multiplier.toFixed(2) + "x";
-
-},100);
-
-</script>
+<img
+src="IMG_0265.jpeg"
+class="game-image"
+alt="ESCALATOR GAME">
 
 </body>
 </html>
