@@ -14,63 +14,24 @@
     box-sizing:border-box;
 }
 
+html,
 body{
+    width:100%;
+    height:100%;
     overflow:hidden;
     background:#000;
-    font-family:Arial, sans-serif;
 }
 
 .container{
-    position:relative;
-    width:100vw;
-    height:100vh;
+    width:100%;
+    height:100%;
 }
 
-/* Background Image */
 .background{
     width:100%;
     height:100%;
     object-fit:cover;
-}
-
-/* PLAY Button */
-.play-btn{
-
-    position:absolute;
-
-    left:23%;
-    top:58%;
-
-    width:350px;
-    height:90px;
-
-    border:none;
-    border-radius:12px;
-
-    background:linear-gradient(
-        to bottom,
-        #f0c96a,
-        #c48b2c
-    );
-
-    color:#000;
-
-    font-size:48px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    box-shadow:
-    0 0 20px rgba(255,200,80,.4);
-
-    transition:.3s;
-
-}
-
-.play-btn:hover{
-
-    transform:scale(1.05);
-
+    display:block;
 }
 
 </style>
@@ -79,30 +40,12 @@ body{
 
 <div class="container">
 
-    <!-- Your uploaded image -->
     <img
     src="FF8CFF71-B0F7-4C66-A955-B7CCFEA8F124.jpeg"
     class="background"
     alt="ESCALATOR">
 
-    <!-- Play Button -->
-    <button
-    class="play-btn"
-    onclick="startGame()">
-    PLAY
-    </button>
-
 </div>
-
-<script>
-
-function startGame(){
-
-    window.location.href="game.html";
-
-}
-
-</script>
 
 </body>
 </html>
