@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ESCALATOR GAME</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+    min-height:100vh;
+}
+
+.header{
+    text-align:center;
+    padding:20px;
+    font-size:32px;
+    font-weight:bold;
+    color:#d4af37;
+}
+
+.game-area{
+    text-align:center;
+    padding-top:40px;
+}
+
+.multiplier{
+    font-size:70px;
+    font-weight:bold;
+    color:#ffd700;
+    margin-bottom:20px;
+}
+
+.train{
+    font-size:80px;
+    margin-bottom:30px;
+}
+
+.controls{
+    width:90%;
+    max-width:400px;
+    margin:auto;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:20px;
+}
+
+.bet-btn,
+.cashout-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:10px;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.bet-btn{
+    background:#d4af37;
+    color:black;
+    margin-bottom:10px;
+}
+
+.cashout-btn{
+    background:#28a745;
+    color:white;
+}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+ESCALATOR
+</div>
+
+<div class="game-area">
+
+    <div class="multiplier" id="multiplier">
+        1.00x
+    </div>
+
+    <div class="train">
+        🚆
+    </div>
+
+    <div class="controls">
+
+        <input
+        type="number"
+        placeholder="Enter Bet Amount">
+
+        <button class="bet-btn">
+            PLACE BET
+        </button>
+
+        <button class="cashout-btn">
+            CASH OUT
+        </button>
+
+    </div>
+
+</div>
+
+<script>
+
+let multiplier = 1.00;
+
+setInterval(() => {
+
+    multiplier += 0.01;
+
+    document.getElementById("multiplier")
+    .innerText = multiplier.toFixed(2) + "x";
+
+},100);
+
+</script>
+
+</body>
+</html>
