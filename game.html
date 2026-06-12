@@ -1,169 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ESCALATOR GAME</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:#000;
-}
-
-.container{
-    position:relative;
-    width:100%;
-}
-
-.game-image{
-    width:100%;
-    height:auto;
-    display:block;
-}
-
-/* Back button */
-.back-button{
-    position:absolute;
-    top:0;
-    left:0;
-    width:120px;
-    height:120px;
-    z-index:100;
-}
-
-
-/* Normal multiplier - shifted down */
-.multiplier{
-    position:absolute;
-    top:60%;
-    left:23%;
-    transform:translate(-50%,-50%);
-    color:white;
-    font-size:42px;
-    font-weight:bold;
-    text-align:center;
-    text-shadow:0 0 20px #00aaff;
-    z-index:100;
-    width:250px;
-}
-
-
-/* Train crash emoji in middle of screen */
-.train-crash{
-    position:absolute;
-    top:42%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    font-size:70px;
-    z-index:100;
-    display:none;
-}
-
-
-/* Hidden amount */
-.amount{
-    display:none;
-}
-
-
-/* Quick amount buttons */
-.quick{
-    position:absolute;
-    width:80px;
-    height:50px;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    z-index:100;
-}
-
-#b100{
-    bottom:10%;
-    left:4%;
-}
-
-#b200{
-    bottom:10%;
-    left:16%;
-}
-
-#b500{
-    bottom:4%;
-    left:4%;
-}
-
-#b1000{
-    bottom:4%;
-    left:16%;
-}
-
-
-/* Bet button */
-.bet-button{
-    position:absolute;
-    bottom:7%;
-    right:12%;
-    width:38%;
-    height:16%;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    z-index:100;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-<img 
-src="2E1DE6F2-CAA9-4B77-977D-58FEC0968696.png"
-class="game-image">
-
-
-<a href="index.html" class="back-button"></a>
-
-
-<!-- Multiplier -->
-<div class="multiplier" id="multiplier">
-1.00x
 </div>
-
-
-<!-- Train crash icon -->
-<div class="train-crash" id="trainCrash">
-🚂💥
-</div>
-
-
-<!-- Hidden amount -->
-<div class="amount" id="amount">
-50.00
-</div>
-
-
-<button class="quick" id="b100"></button>
-<button class="quick" id="b200"></button>
-<button class="quick" id="b500"></button>
-<button class="quick" id="b1000"></button>
-
-
-<button class="bet-button"></button>
-
-
-</div>
-
 
 <script>
 
@@ -174,55 +9,116 @@ let timer;
 let crashPoint = 1;
 
 
-// Quick amount buttons
+// Update all bet displays
+function updateBet(){
 
-document.getElementById("b100").onclick = function(){
-    bet = 100;
+    document.getElementById("amount").innerText =
+    bet.toFixed(2);
+
+    document.getElementById("betNGN").innerText =
+    bet.toFixed(2) + " NGN";
+
+}
+
+
+// Plus button
+document.getElementById("plus").onclick = function(){
+
+    bet += 50;
+    updateBet();
+
 };
+
+
+// Minus button
+document.getElementById("minus").onclick = function(){
+
+    if(bet > 50){
+        bet -= 50;
+        updateBet();
+    }
+
+};
+
+
+// Quick buttons
+document.getElementById("b100").onclick = function(){
+
+    bet = 100;
+    updateBet();
+
+};
+
 
 document.getElementById("b200").onclick = function(){
+
     bet = 200;
+    updateBet();
+
 };
+
 
 document.getElementById("b500").onclick = function(){
+
     bet = 500;
+    updateBet();
+
 };
+
 
 document.getElementById("b1000").onclick = function(){
+
     bet = 1000;
+    updateBet();
+
 };
 
 
-// Crash odds generator
-
+// ESCALATOR crash odds
 function generateCrashPoint(){
 
-let chance = Math.random();
+    let chance = Math.random();
 
 
-if(chance < 0.7412){
-    return 1 + Math.random() * 0.79;
+    // 74.12% Low
+    if(chance < 0.7412){
+
+        return 1 + Math.random() * 0.79;
+
+    }
+
+
+    // 19% Medium
+    else if(chance < 0.9312){
+
+        return 2 + Math.random() * 6.99;
+
+    }
+
+
+    // 5% High
+    else if(chance < 0.9812){
+
+        return 9 + Math.random() * 26.99;
+
+    }
+
+
+    // 1.88% Jackpot
+    else{
+
+        return 36 + Math.random() * 64;
+
+    }
+
 }
 
-else if(chance < 0.9312){
-    return 2 + Math.random() * 6.99;
-}
 
-else if(chance < 0.9812){
-    return 9 + Math.random() * 26.99;
-}
-
-else{
-    return 36 + Math.random() * 64;
-}
-
-}
-
-// Start automatic ESCALATOR game
-
+// Automatic game rounds
 function startGame(){
 
     if(running) return;
+
 
     running = true;
 
@@ -231,20 +127,28 @@ function startGame(){
     crashPoint = generateCrashPoint();
 
 
-    // Reset multiplier style
-    let display = document.getElementById("multiplier");
+    let display =
+    document.getElementById("multiplier");
 
+
+    let train =
+    document.getElementById("trainCrash");
+
+
+    // Reset display
     display.style.color = "white";
-    display.style.textShadow = "0 0 20px #00aaff";
+
+    display.style.textShadow =
+    "0 0 20px #00aaff";
 
     display.innerHTML = "1.00x";
 
 
-    // Hide train crash emoji
-    document.getElementById("trainCrash").style.display = "none";
+    train.style.display = "none";
 
 
     timer = setInterval(function(){
+
 
         multiplier += 0.01;
 
@@ -253,60 +157,53 @@ function startGame(){
         multiplier.toFixed(2) + "x";
 
 
-        // When train crashes
+        // Train accident
         if(multiplier >= crashPoint){
 
+
             clearInterval(timer);
+
 
             running = false;
 
 
-            // Same multiplier turns red
+            // Turn multiplier red
             display.style.color = "red";
-            display.style.textShadow = "0 0 25px red";
+
+            display.style.textShadow =
+            "0 0 25px red";
 
 
-            // Keep red multiplier visible for 6 seconds
+            // Show 🚂💥 immediately
+            train.style.display = "block";
+
+
+            // Keep accident screen for 6 seconds
             setTimeout(function(){
 
 
-                // Hide multiplier and show train crash
-                display.innerHTML = "";
-
-                document.getElementById("trainCrash").style.display =
-                "block";
+                train.style.display = "none";
 
 
-                // Show 🚂💥 for 3 seconds
-                setTimeout(function(){
+                // Start next round
+                startGame();
 
 
-                    document.getElementById("trainCrash").style.display =
-                    "none";
-
-
-                    // Start another round automatically
-                    startGame();
-
-
-                },3000);
-
-
-            },6000);
+            }, 6000);
 
 
         }
 
 
-    },100);
-
+    }, 100);
 
 }
 
 
-// Automatically start game when page opens
-
+// Start automatically
 window.onload = function(){
+
+    updateBet();
 
     startGame();
 
@@ -314,6 +211,6 @@ window.onload = function(){
 
 </script>
 
-</body>
 
+</body>
 </html>
