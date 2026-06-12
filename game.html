@@ -1,3 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ESCALATOR GAME</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+}
+
+.container{
+    position:relative;
+    width:100%;
+}
+
+.game-image{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+/* Back button */
+.back-button{
+    position:absolute;
+    top:0;
+    left:0;
+    width:120px;
+    height:120px;
+    z-index:100;
+}
+
+/* Multiplier blue box */
+.multiplier{
+    position:absolute;
+    top:56%;
+    left:23%;
+    transform:translate(-50%,-50%);
+    color:white;
+    font-size:45px;
+    font-weight:bold;
+    text-shadow:0 0 20px #00aaff;
+}
+
+/* Amount display */
+.amount{
+    position:absolute;
+    bottom:16%;
+    left:15%;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* Quick amount buttons */
+.quick{
+    position:absolute;
+    width:80px;
+    height:50px;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+}
+
+#b100{
+    bottom:10%;
+    left:4%;
+}
+
+#b200{
+    bottom:10%;
+    left:16%;
+}
+
+#b500{
+    bottom:4%;
+    left:4%;
+}
+
+#b1000{
+    bottom:4%;
+    left:16%;
+}
+
+/* Bet button */
+.bet-button{
+    position:absolute;
+    bottom:7%;
+    right:12%;
+    width:38%;
+    height:16%;
+    background:transparent;
+    border:none;
+    cursor:pointer;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<img 
+src="B81F7178-6C17-46A2-BD23-353DB83C9F67.png"
+class="game-image">
+
+<a href="index.html" class="back-button"></a>
+
+<div class="multiplier" id="multiplier">
+1.00x
+</div>
+
+<div class="amount" id="amount">
+50.00
+</div>
+
+<button class="quick" id="b100"></button>
+<button class="quick" id="b200"></button>
+<button class="quick" id="b500"></button>
+<button class="quick" id="b1000"></button>
+
+<button class="bet-button" onclick="startGame()"></button>
+
+</div>
+
+
 <script>
 
 let bet = 50;
@@ -7,14 +144,14 @@ let timer;
 let crashPoint = 1;
 
 
-// Update amount display
+// Update amount
 function updateAmount(){
     document.getElementById("amount").innerText =
     bet.toFixed(2);
 }
 
 
-// Quick bet controls
+// Quick amount buttons
 document.getElementById("b100").onclick = function(){
     bet = 100;
     updateAmount();
@@ -36,49 +173,44 @@ document.getElementById("b1000").onclick = function(){
 };
 
 
-// ESCALATOR crash odds generator
+// ESCALATOR crash generator
 function generateCrashPoint(){
 
     let chance = Math.random();
 
-    // 74.12% Low odds (1.00x - 1.79x)
+    // 74.12% Low (1.00x - 1.79x)
     if(chance < 0.7412){
         return 1 + Math.random() * 0.79;
     }
 
-    // 19% Medium odds (2.00x - 8.99x)
+    // 19% Medium (2.00x - 8.99x)
     else if(chance < 0.9312){
         return 2 + Math.random() * 6.99;
     }
 
-    // 5% High odds (9.00x - 35.99x)
+    // 5% High (9.00x - 35.99x)
     else if(chance < 0.9812){
         return 9 + Math.random() * 26.99;
     }
 
-    // 1.88% Jackpot (36.00x - 100.00x)
+    // 1.88% Jackpot (36x - 100x)
     else{
         return 36 + Math.random() * 64;
     }
-
 }
 
 
-// Start the game round
+// Start the game
 function startGame(){
 
-    if(running){
-        return;
-    }
+    if(running) return;
 
     running = true;
-    multiplier = 1.00;
+    multiplier = 1;
 
-    // Generate a new random crash point
     crashPoint = generateCrashPoint();
 
-    document.getElementById("multiplier").innerText =
-    "1.00x";
+    document.getElementById("multiplier").innerText = "1.00x";
 
 
     timer = setInterval(function(){
@@ -89,13 +221,14 @@ function startGame(){
         multiplier.toFixed(2) + "x";
 
 
-        // Check if the train crashes
+        // Crash point reached
         if(multiplier >= crashPoint){
 
             clearInterval(timer);
 
             document.getElementById("multiplier").innerText =
             "💥 CRASH";
+
 
             running = false;
 
@@ -106,7 +239,7 @@ function startGame(){
                 document.getElementById("multiplier").innerText =
                 "1.00x";
 
-            },3000);
+            }, 3000);
 
         }
 
@@ -115,3 +248,6 @@ function startGame(){
 }
 
 </script>
+
+</body>
+</html>
