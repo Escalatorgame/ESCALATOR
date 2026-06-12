@@ -1,151 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>ESCALATOR GAME</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    background:#000;
-}
-
-.container{
-    position:relative;
-    width:100%;
-}
-
-.game-image{
-    width:100%;
-    height:auto;
-    display:block;
-}
-
-/* Back button */
-.back-button{
-    position:absolute;
-    top:0;
-    left:0;
-    width:120px;
-    height:120px;
-    z-index:100;
-}
-
-/* Multiplier box */
-.multiplier{
-    position:absolute;
-    top:56%;
-    left:23%;
-    transform:translate(-50%,-50%);
-    color:white;
-    font-size:45px;
-    font-weight:bold;
-    text-shadow:0 0 20px #00aaff;
-    z-index:100;
-}
-
-/* Bet amount display */
-.amount{
-    position:absolute;
-    bottom:16%;
-    left:15%;
-    color:white;
-    font-size:28px;
-    font-weight:bold;
-    z-index:100;
-}
-
-/* Invisible amount buttons */
-.quick{
-    position:absolute;
-    width:80px;
-    height:50px;
-    background:transparent;
-    border:none;
-    z-index:100;
-    cursor:pointer;
-}
-
-#b100{
-    bottom:10%;
-    left:4%;
-}
-
-#b200{
-    bottom:10%;
-    left:16%;
-}
-
-#b500{
-    bottom:4%;
-    left:4%;
-}
-
-#b1000{
-    bottom:4%;
-    left:16%;
-}
-
-/* Invisible Bet button */
-.bet-button{
-    position:absolute;
-    bottom:7%;
-    right:12%;
-    width:38%;
-    height:16%;
-    background:transparent;
-    border:none;
-    cursor:pointer;
-    z-index:100;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<div class="container">
-
-    <!-- Game Background -->
-    <img
-    src="B81F7178-6C17-46A2-BD23-353DB83C9F67.png"
-    class="game-image"
-    alt="ESCALATOR GAME">
-
-    <!-- Back Button -->
-    <a href="index.html" class="back-button"></a>
-
-    <!-- Multiplier -->
-    <div class="multiplier" id="multiplier">
-        1.00x
-    </div>
-
-    <!-- Bet Amount -->
-    <div class="amount" id="amount">
-        50.00
-    </div>
-
-    <!-- Quick Bet Buttons -->
-    <button class="quick" id="b100"></button>
-    <button class="quick" id="b200"></button>
-    <button class="quick" id="b500"></button>
-    <button class="quick" id="b1000"></button>
-
-    <!-- Start Bet -->
-    <button class="bet-button" onclick="startGame()"></button>
-
-</div>
-
-
 <script>
 
 let bet = 50;
@@ -184,35 +36,35 @@ document.getElementById("b1000").onclick = function(){
 };
 
 
-// Generate crash odds
+// ESCALATOR crash odds generator
 function generateCrashPoint(){
 
     let chance = Math.random();
 
-    // 65% Low odds
-    if(chance < 0.65){
-        return 1 + Math.random() * 0.99;
+    // 74.12% Low odds (1.00x - 1.79x)
+    if(chance < 0.7412){
+        return 1 + Math.random() * 0.79;
     }
 
-    // 25% Medium odds
-    else if(chance < 0.90){
-        return 2 + Math.random() * 7.99;
+    // 19% Medium odds (2.00x - 8.99x)
+    else if(chance < 0.9312){
+        return 2 + Math.random() * 6.99;
     }
 
-    // 8.4% High odds
-    else if(chance < 0.984){
-        return 10 + Math.random() * 39.99;
+    // 5% High odds (9.00x - 35.99x)
+    else if(chance < 0.9812){
+        return 9 + Math.random() * 26.99;
     }
 
-    // 1.6% Jackpot
+    // 1.88% Jackpot (36.00x - 100.00x)
     else{
-        return 50 + Math.random() * 50;
+        return 36 + Math.random() * 64;
     }
 
 }
 
 
-// Start game
+// Start the game round
 function startGame(){
 
     if(running){
@@ -222,6 +74,7 @@ function startGame(){
     running = true;
     multiplier = 1.00;
 
+    // Generate a new random crash point
     crashPoint = generateCrashPoint();
 
     document.getElementById("multiplier").innerText =
@@ -236,7 +89,7 @@ function startGame(){
         multiplier.toFixed(2) + "x";
 
 
-        // Crash check
+        // Check if the train crashes
         if(multiplier >= crashPoint){
 
             clearInterval(timer);
@@ -262,6 +115,3 @@ function startGame(){
 }
 
 </script>
-
-</body>
-</html>
