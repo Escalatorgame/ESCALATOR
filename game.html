@@ -130,10 +130,9 @@ class="game-image">
 <button class="quick" id="b500"></button>
 <button class="quick" id="b1000"></button>
 
-<button class="bet-button" onclick="startGame()"></button>
+<button class="bet-button"></button>
 
 </div>
-
 
 <script>
 
@@ -177,8 +176,7 @@ document.getElementById("b1000").onclick = function(){
 function generateCrashPoint(){
 
     let chance = Math.random();
-
-    // 74.12% Low (1.00x - 1.79x)
+        // 74.12% Low (1.00x - 1.79x)
     if(chance < 0.7412){
         return 1 + Math.random() * 0.79;
     }
@@ -197,31 +195,35 @@ function generateCrashPoint(){
     else{
         return 36 + Math.random() * 64;
     }
+
 }
 
 
-// Start the game
+// Start automatic game round
 function startGame(){
 
     if(running) return;
 
     running = true;
+
     multiplier = 1;
 
     crashPoint = generateCrashPoint();
 
-    document.getElementById("multiplier").innerText = "1.00x";
+    document.getElementById("multiplier").innerText =
+    "1.00x";
 
 
     timer = setInterval(function(){
 
         multiplier += 0.01;
 
+
         document.getElementById("multiplier").innerText =
         multiplier.toFixed(2) + "x";
 
 
-        // Crash point reached
+        // Crash check
         if(multiplier >= crashPoint){
 
             clearInterval(timer);
@@ -233,19 +235,26 @@ function startGame(){
             running = false;
 
 
-            // Reset after 3 seconds
+            // Start another round after 3 seconds
             setTimeout(function(){
 
-                document.getElementById("multiplier").innerText =
-                "1.00x";
+                startGame();
 
-            }, 3000);
+            },3000);
 
         }
 
     },100);
 
 }
+
+
+// Automatically start when page opens
+window.onload = function(){
+
+    startGame();
+
+};
 
 </script>
 
