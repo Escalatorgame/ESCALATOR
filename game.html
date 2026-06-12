@@ -39,27 +39,43 @@ body{
     z-index:100;
 }
 
-/* Multiplier blue box */
+/* Multiplier box - shifted down */
 .multiplier{
     position:absolute;
-    top:56%;
+    top:58%;
     left:23%;
     transform:translate(-50%,-50%);
     color:white;
-    font-size:45px;
+    font-size:42px;
     font-weight:bold;
+    text-align:center;
     text-shadow:0 0 20px #00aaff;
+    z-index:100;
+    width:250px;
 }
 
-/* Amount display */
-.amount{
-    position:absolute;
-    bottom:16%;
-    left:15%;
+/* Train accident text */
+.accident-title{
+    display:block;
     color:white;
-    font-size:28px;
-    font-weight:bold;
+    font-size:16px;
+    letter-spacing:2px;
+    margin-bottom:8px;
 }
+
+/* Red crash multiplier */
+.crash-number{
+    color:red;
+    font-size:60px;
+    text-shadow:0 0 20px red;
+}
+
+
+/* Amount display removed */
+.amount{
+    display:none;
+}
+
 
 /* Quick amount buttons */
 .quick{
@@ -69,6 +85,7 @@ body{
     background:transparent;
     border:none;
     cursor:pointer;
+    z-index:100;
 }
 
 #b100{
@@ -91,6 +108,7 @@ body{
     left:16%;
 }
 
+
 /* Bet button */
 .bet-button{
     position:absolute;
@@ -101,6 +119,7 @@ body{
     background:transparent;
     border:none;
     cursor:pointer;
+    z-index:100;
 }
 
 </style>
@@ -117,22 +136,32 @@ class="game-image">
 
 <a href="index.html" class="back-button"></a>
 
+
+<!-- Multiplier Display -->
 <div class="multiplier" id="multiplier">
 1.00x
 </div>
 
+
+<!-- Hidden amount -->
 <div class="amount" id="amount">
 50.00
 </div>
 
+
+<!-- Quick amount buttons -->
 <button class="quick" id="b100"></button>
 <button class="quick" id="b200"></button>
 <button class="quick" id="b500"></button>
 <button class="quick" id="b1000"></button>
 
+
+<!-- Bet area -->
 <button class="bet-button"></button>
 
+
 </div>
+
 
 <script>
 
@@ -143,40 +172,30 @@ let timer;
 let crashPoint = 1;
 
 
-// Update amount
-function updateAmount(){
-    document.getElementById("amount").innerText =
-    bet.toFixed(2);
-}
-
-
 // Quick amount buttons
 document.getElementById("b100").onclick = function(){
     bet = 100;
-    updateAmount();
 };
 
 document.getElementById("b200").onclick = function(){
     bet = 200;
-    updateAmount();
 };
 
 document.getElementById("b500").onclick = function(){
     bet = 500;
-    updateAmount();
 };
 
 document.getElementById("b1000").onclick = function(){
     bet = 1000;
-    updateAmount();
 };
 
 
 // ESCALATOR crash generator
 function generateCrashPoint(){
 
-    let chance = Math.random();
-        // 74.12% Low (1.00x - 1.79x)
+let chance = Math.random();
+
+    // 74.12% Low (1.00x - 1.79x)
     if(chance < 0.7412){
         return 1 + Math.random() * 0.79;
     }
@@ -199,7 +218,7 @@ function generateCrashPoint(){
 }
 
 
-// Start automatic game round
+// Start automatic game
 function startGame(){
 
     if(running) return;
@@ -210,7 +229,9 @@ function startGame(){
 
     crashPoint = generateCrashPoint();
 
-    document.getElementById("multiplier").innerText =
+    document.getElementById("multiplier").style.color = "white";
+    document.getElementById("multiplier").style.textShadow = "0 0 20px #00aaff";
+    document.getElementById("multiplier").innerHTML =
     "1.00x";
 
 
@@ -218,29 +239,46 @@ function startGame(){
 
         multiplier += 0.01;
 
-
-        document.getElementById("multiplier").innerText =
+        document.getElementById("multiplier").innerHTML =
         multiplier.toFixed(2) + "x";
 
 
-        // Crash check
+        // Train accident
         if(multiplier >= crashPoint){
 
             clearInterval(timer);
 
-            document.getElementById("multiplier").innerText =
-            "💥 CRASH";
-
-
             running = false;
 
 
-            // Start another round after 3 seconds
+            // Show red accident screen for 6 seconds
+            document.getElementById("multiplier").innerHTML =
+            "<span class='accident-title'>TRAIN ACCIDENT</span>" +
+            "<span class='crash-number'>" +
+            multiplier.toFixed(2) +
+            "x</span>";
+
+
             setTimeout(function(){
 
-                startGame();
+                // Show train crash icon
+                document.getElementById("multiplier").style.color = "red";
+                document.getElementById("multiplier").style.textShadow =
+                "0 0 20px red";
 
-            },3000);
+                document.getElementById("multiplier").innerHTML =
+                "🚂💥";
+
+
+                // Wait 3 seconds then start a new round
+                setTimeout(function(){
+
+                    startGame();
+
+                },3000);
+
+
+            },6000);
 
         }
 
@@ -249,7 +287,7 @@ function startGame(){
 }
 
 
-// Automatically start when page opens
+// Start automatically when player opens the page
 window.onload = function(){
 
     startGame();
