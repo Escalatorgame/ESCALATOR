@@ -14,21 +14,14 @@
     box-sizing:border-box;
 }
 
-html,
 body{
-    width:100%;
-    min-height:100vh;
     background:#000;
 }
-
-/* Container */
 
 .container{
     position:relative;
     width:100%;
 }
-
-/* Full Image */
 
 .game-image{
     width:100%;
@@ -36,37 +29,173 @@ body{
     display:block;
 }
 
-/* Invisible Back Button */
-
+/* Back button */
 .back-button{
     position:absolute;
-
     top:0;
     left:0;
-
     width:120px;
     height:120px;
+    z-index:100;
+}
 
-    z-index:999;
+/* Multiplier blue box */
+.multiplier{
+    position:absolute;
+    top:56%;
+    left:23%;
+    transform:translate(-50%,-50%);
+    
+    color:white;
+    font-size:45px;
+    font-weight:bold;
+    text-shadow:0 0 20px #00aaff;
+}
 
+/* Amount display */
+.amount{
+    position:absolute;
+    bottom:16%;
+    left:15%;
+    color:white;
+    font-size:28px;
+    font-weight:bold;
+}
+
+/* Quick amount buttons */
+.quick{
+    position:absolute;
+    width:80px;
+    height:50px;
     background:transparent;
+    border:none;
+}
+
+#b100{
+    bottom:10%;
+    left:4%;
+}
+
+#b200{
+    bottom:10%;
+    left:16%;
+}
+
+#b500{
+    bottom:4%;
+    left:4%;
+}
+
+#b1000{
+    bottom:4%;
+    left:16%;
+}
+
+/* Bet button */
+.bet-button{
+    position:absolute;
+    bottom:7%;
+    right:12%;
+    width:38%;
+    height:16%;
+    background:transparent;
+    border:none;
+    cursor:pointer;
 }
 
 </style>
 </head>
+
 <body>
 
 <div class="container">
 
-    <img
-    src="B81F7178-6C17-46A2-BD23-353DB83C9F67.png"
-    class="game-image"
-    alt="ESCALATOR GAME">
+<img 
+src="B81F7178-6C17-46A2-BD23-353DB83C9F67.png"
+class="game-image">
 
-    <!-- Back to Home -->
-    <a href="index.html" class="back-button"></a>
+<a href="index.html" class="back-button"></a>
+
+
+<div class="multiplier" id="multiplier">
+1.00x
+</div>
+
+
+<div class="amount" id="amount">
+50.00
+</div>
+
+
+<button class="quick" id="b100"></button>
+<button class="quick" id="b200"></button>
+<button class="quick" id="b500"></button>
+<button class="quick" id="b1000"></button>
+
+
+<button class="bet-button" onclick="startGame()"></button>
 
 </div>
+
+
+<script>
+
+let bet = 50;
+let multiplier = 1;
+let running = false;
+let timer;
+
+
+function updateAmount(){
+    document.getElementById("amount").innerText =
+    bet.toFixed(2);
+}
+
+document.getElementById("b100").onclick = function(){
+    bet = 100;
+    updateAmount();
+}
+
+document.getElementById("b200").onclick = function(){
+    bet = 200;
+    updateAmount();
+}
+
+document.getElementById("b500").onclick = function(){
+    bet = 500;
+    updateAmount();
+}
+
+document.getElementById("b1000").onclick = function(){
+    bet = 1000;
+    updateAmount();
+}
+
+
+function startGame(){
+
+    if(running) return;
+
+    running = true;
+    multiplier = 1;
+
+    document.getElementById("multiplier").innerText =
+    "1.00x";
+
+
+    timer = setInterval(function(){
+
+        multiplier += 0.01;
+
+        document.getElementById("multiplier").innerText =
+        multiplier.toFixed(2)+"x";
+
+    },100);
+
+}
+
+</script>
+
 
 </body>
 </html>
