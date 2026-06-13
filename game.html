@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -29,6 +31,7 @@ body{
     display:block;
 }
 
+
 /* Back button */
 .back-button{
     position:absolute;
@@ -38,6 +41,7 @@ body{
     height:120px;
     z-index:100;
 }
+
 
 /* Multiplier */
 .multiplier{
@@ -54,10 +58,11 @@ body{
     z-index:100;
 }
 
-/* Train crash emoji */
+
+/* Train crash - moved up */
 .train-crash{
     position:absolute;
-    top:35%;
+    top:30%;
     left:50%;
     transform:translate(-50%, -50%);
     font-size:70px;
@@ -65,38 +70,42 @@ body{
     z-index:100;
 }
 
-/* Bet box top text */
+
+/* BET text moved right */
 .bet-title{
     position:absolute;
     bottom:17%;
-    left:15%;
+    left:17%;
     color:white;
     font-size:18px;
     font-weight:bold;
     z-index:100;
 }
 
-/* Bet amount NGN */
+
+/* NGN amount moved right */
 .bet-ngn{
     position:absolute;
     bottom:13%;
-    left:12%;
+    left:16%;
     color:white;
     font-size:16px;
     font-weight:bold;
     z-index:100;
 }
 
+
 /* Amount between - and + */
 .amount{
     position:absolute;
-    bottom:6%;
-    left:13%;
+    bottom:7%;
+    left:13.5%;
     color:white;
-    font-size:24px;
+    font-size:18px;
     font-weight:bold;
     z-index:100;
 }
+
 
 /* Minus button */
 .minus{
@@ -111,6 +120,7 @@ body{
     z-index:100;
 }
 
+
 /* Plus button */
 .plus{
     position:absolute;
@@ -124,6 +134,7 @@ body{
     z-index:100;
 }
 
+
 /* Quick amount buttons */
 .quick{
     position:absolute;
@@ -135,25 +146,30 @@ body{
     z-index:100;
 }
 
+
 #b100{
     bottom:10%;
     left:4%;
 }
+
 
 #b200{
     bottom:10%;
     left:16%;
 }
 
+
 #b500{
     bottom:4%;
     left:4%;
 }
 
+
 #b1000{
     bottom:4%;
     left:16%;
 }
+
 
 /* Bet button */
 .bet-button{
@@ -176,51 +192,69 @@ body{
 
 <div class="container">
 
-<img
+
+<img 
 src="2E1DE6F2-CAA9-4B77-977D-58FEC0968696.png"
 class="game-image">
 
-<a href="index.html" class="back-button"></a>
+
+<a href="index.html"
+class="back-button"></a>
 
 <!-- Multiplier -->
 <div class="multiplier" id="multiplier">
-1.00x
+    1.00x
 </div>
 
-<!-- Train crash -->
+
+<!-- Train crash emoji -->
 <div class="train-crash" id="trainCrash">
-🚂💥
+    🚂💥
 </div>
 
-<!-- Bet display -->
+
+<!-- Bet box texts -->
 <div class="bet-title">
-BET
+    BET
 </div>
+
 
 <div class="bet-ngn" id="betNGN">
-50.00 NGN
+    50.00 NGN
 </div>
 
+
+<!-- Amount between - and + -->
 <div class="amount" id="amount">
-50.00
+    50.00
 </div>
 
-<!-- Minus & Plus -->
+
+<!-- Minus and Plus buttons -->
 <button class="minus" id="minus"></button>
+
 <button class="plus" id="plus"></button>
 
-<!-- Quick buttons -->
+
+<!-- Quick amount buttons -->
 <button class="quick" id="b100"></button>
+
 <button class="quick" id="b200"></button>
+
 <button class="quick" id="b500"></button>
+
 <button class="quick" id="b1000"></button>
+
 
 <!-- Bet area -->
 <button class="bet-button"></button>
 
+
 </div>
 
+
 <script>
+
 
 let bet = 50;
 let multiplier = 1;
@@ -229,11 +263,13 @@ let timer;
 let crashPoint = 1;
 
 
-// Update all bet displays
+
+// Update all amount displays
 function updateBet(){
 
     document.getElementById("amount").innerText =
     bet.toFixed(2);
+
 
     document.getElementById("betNGN").innerText =
     bet.toFixed(2) + " NGN";
@@ -245,6 +281,7 @@ function updateBet(){
 document.getElementById("plus").onclick = function(){
 
     bet += 50;
+
     updateBet();
 
 };
@@ -254,17 +291,23 @@ document.getElementById("plus").onclick = function(){
 document.getElementById("minus").onclick = function(){
 
     if(bet > 50){
+
         bet -= 50;
+
         updateBet();
+
     }
 
 };
 
 
-// Quick buttons
+
+// Quick amount buttons
+
 document.getElementById("b100").onclick = function(){
 
     bet = 100;
+
     updateBet();
 
 };
@@ -273,6 +316,7 @@ document.getElementById("b100").onclick = function(){
 document.getElementById("b200").onclick = function(){
 
     bet = 200;
+
     updateBet();
 
 };
@@ -281,6 +325,7 @@ document.getElementById("b200").onclick = function(){
 document.getElementById("b500").onclick = function(){
 
     bet = 500;
+
     updateBet();
 
 };
@@ -289,100 +334,22 @@ document.getElementById("b500").onclick = function(){
 document.getElementById("b1000").onclick = function(){
 
     bet = 1000;
+
     updateBet();
 
 };
 
 
-// ESCALATOR crash odds
+// ESCALATOR crash odds generator
+
 function generateCrashPoint(){
 
     let chance = Math.random();
 
-
-    // 74.12% Low
-    if(chance < 0.7412){
-
-        return 1 + Math.random() * 0.79;
-
-    }
-
-
-    // 19% Medium
-    else if(chance < 0.9312){
-
-        return 2 + Math.random() * 6.99;
-
-    }
-
-
-    // 5% High
-    else if(chance < 0.9812){
-
-        return 9 + Math.random() * 26.99;
-
-    }
-
-
-    // 1.88% Jackpot
-    else{
-
-        return 36 + Math.random() * 64;
-
-    }
-
-}
-
-
-// Automatic game rounds
-function startGame(){
-
-    if(running) return;
-
-
-    running = true;
-
-    multiplier = 1;
-
-    crashPoint = generateCrashPoint();
-
-
-    let display =
-    document.getElementById("multiplier");
-
-
-    let train =
-    document.getElementById("trainCrash");
-
-
-    // Reset display
-    display.style.color = "white";
-
-    display.style.textShadow =
-    "0 0 20px #00aaff";
-
-    display.innerHTML = "1.00x";
-
-
-    train.style.display = "none";
-
-
-    timer = setInterval(function(){
-
-
-        multiplier += 0.01;
-
-
-        display.innerHTML =
-        multiplier.toFixed(2) + "x";
-
-
         // Train accident
         if(multiplier >= crashPoint){
 
-
             clearInterval(timer);
-
 
             running = false;
 
@@ -401,26 +368,24 @@ function startGame(){
             // Keep accident screen for 6 seconds
             setTimeout(function(){
 
-
+                // Hide train crash
                 train.style.display = "none";
 
 
-                // Start next round
+                // Start next round automatically
                 startGame();
 
-
-            }, 6000);
-
+            },6000);
 
         }
 
 
-    }, 100);
+    },100);
 
 }
 
 
-// Start automatically
+// Start automatically when page opens
 window.onload = function(){
 
     updateBet();
@@ -433,4 +398,5 @@ window.onload = function(){
 
 
 </body>
+
 </html>
