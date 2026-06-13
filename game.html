@@ -257,16 +257,16 @@ let crashPoint = 1;
 
 
 // Update all bet displays
+
 function updateBet(){
 
-    document.getElementById("amount").innerText =
+    document.getElementById("amount").value =
     bet.toFixed(2);
 
     document.getElementById("betNGN").innerText =
     bet.toFixed(2) + " NGN";
 
 }
-
 
 // Plus button
 document.getElementById("plus").onclick = function(){
@@ -455,11 +455,28 @@ function startGame(){
 
 
 // Start game automatically when page opens
+
 window.onload = function(){
 
     updateBet();
-
     startGame();
+
+    // ✅ ADD THIS HERE (THIS IS THE CORRECT PLACE)
+
+    document.getElementById("amount").oninput = function(){
+
+        let value = parseFloat(this.value);
+
+        // If invalid, fallback to minimum bet
+        if(isNaN(value) || value < 50){
+            value = 50;
+        }
+
+        bet = value;
+
+        document.getElementById("betNGN").innerText =
+        bet.toFixed(2) + " NGN";
+    };
 
 };
 
