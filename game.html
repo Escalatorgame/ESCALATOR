@@ -463,21 +463,29 @@ window.onload = function(){
 
     // ✅ ADD THIS HERE (THIS IS THE CORRECT PLACE)
 
-    document.getElementById("amount").oninput = function(){
+   document.getElementById("amount").oninput = function(){
 
-        let value = parseFloat(this.value);
+    let value = parseFloat(this.value);
 
-        // If invalid, fallback to minimum bet
-        if(isNaN(value) || value < 50){
-            value = 50;
-        }
+    if(isNaN(value) || value < 50){
+        value = 50;
+    }
 
-        bet = value;
+    bet = value;
 
-        document.getElementById("betNGN").innerText =
-        bet.toFixed(2) + " NGN";
-    };
+    document.getElementById("betNGN").innerText =
+    bet.toFixed(2) + " NGN";
+};
 
+document.getElementById("amount").onblur = function(){
+
+    let value = parseFloat(this.value);
+
+    if(isNaN(value) || value < 50){
+        value = 50;
+    }
+
+    this.value = value.toFixed(2);
 };
 
 </script>
