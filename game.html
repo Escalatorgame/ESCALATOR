@@ -466,28 +466,43 @@ window.onload = function(){
     updateBet();
     startGame();
 
-    // ✅ ADD THIS HERE (THIS IS THE CORRECT PLACE)
+    document.getElementById("amount").oninput = function(){
 
-   document.getElementById("amount").oninput = function(){
+        let value = parseFloat(this.value);
 
-    let value = parseFloat(this.value);
+        if(isNaN(value) || value < 50){
+            value = 50;
+        }
 
-    // Minimum and maximum stake limits
-    if(isNaN(value) || value < 50){
-        value = 50;
-    }
+        if(value > 80000){
+            value = 80000;
+        }
 
-    if(value > 80000){
-        value = 80000;
-    }
+        bet = value;
 
-    bet = value;
+        document.getElementById("betNGN").innerText =
+        bet.toFixed(2) + " NGN";
+    };
 
-       document.getElementById("betNGN").innerText =
-    bet.toFixed(2) + " NGN";
+
+    // Auto add .00 when player leaves the input
+    document.getElementById("amount").onblur = function(){
+
+        let value = parseFloat(this.value);
+
+        if(isNaN(value) || value < 50){
+            value = 50;
+        }
+
+        if(value > 80000){
+            value = 80000;
+        }
+
+        this.value = value.toFixed(2);
+    };
+
 };
 
-};
 </script>
 
 
