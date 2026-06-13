@@ -170,35 +170,29 @@ function updateBet(){
     bet.toFixed(2) + " NGN";
 
 }
-// Plus button document.getElementById(“plus”).onclick = function(){
+
 bet += 50;
 updateBet();
-};
-// Minus button document.getElementById(“minus”).onclick = function(){
+
 if(bet > 50){
 
     bet -= 50;
     updateBet();
 
 }
-};
-// Quick buttons document.getElementById(“b100”).onclick = function(){
+
 bet = 100;
 updateBet();
-};
-document.getElementById(“b200”).onclick = function(){
+
 bet = 200;
 updateBet();
-};
-document.getElementById(“b500”).onclick = function(){
+
 bet = 500;
 updateBet();
-};
-document.getElementById(“b1000”).onclick = function(){
+
 bet = 1000;
 updateBet();
-};
-// ESCALATOR crash odds function generateCrashPoint(){
+
 let chance = Math.random();
 
 
@@ -232,8 +226,7 @@ else{
     return 36 + Math.random() * 64;
 
 }
-}
-// Automatic game rounds function startGame(){
+
 if(running) return;
 
 
@@ -308,12 +301,10 @@ timer = setInterval(function(){
     }
 
 },100);
-}
-// Start game automatically when page opens window.onload = function(){
+
 updateBet();
 
 startGame();
-};
 </script>
 </body>
 </html>
