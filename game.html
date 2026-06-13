@@ -271,7 +271,11 @@ document.getElementById("minus").onclick = function(){
 
     if(bet > 50){
 
-        bet -= 50;
+        bet -= 30;
+
+        if(bet < 50){
+            bet = 50;
+        }
 
         updateBet();
 
