@@ -1,11 +1,11 @@
 let trainPosition = -350;
+let trainSpeed = 3;
 let trainTimer;
 
 function startTrain(){
 
     let train = document.getElementById("movingTrain");
 
-    // Put train back at the right side
     trainPosition = -350;
     train.style.right = trainPosition + "px";
 
@@ -13,22 +13,23 @@ function startTrain(){
 
     trainTimer = setInterval(function(){
 
-        trainPosition += 6;
+        // Change speed randomly
+        trainSpeed = Math.random() * 5 + 2;
+
+        trainPosition += trainSpeed;
+
+        // Stop the train around the middle of the screen
+        if(trainPosition > window.innerWidth / 2){
+            trainPosition = window.innerWidth / 2;
+        }
 
         train.style.right = trainPosition + "px";
 
-        // Stop when it has crossed the screen
-        if(trainPosition > window.innerWidth + 400){
-            clearInterval(trainTimer);
-        }
-
-    }, 30);
+    }, 40);
 }
 
 
-// Stop the train during accident
 function stopTrain(){
 
     clearInterval(trainTimer);
-
 }
