@@ -1,6 +1,6 @@
 let trainPosition = -350;
 let trainTimer;
-let trainSpeed = 4;
+let trainSpeed = 3;
 
 function startTrain(){
 
@@ -14,9 +14,9 @@ function startTrain(){
 
     trainTimer = setInterval(function(){
 
-        // Small random speed changes
-        if(Math.random() < 0.03){
-            trainSpeed = Math.random() * 2 + 3;
+        // Slight natural speed changes
+        if(Math.random() < 0.02){
+            trainSpeed = Math.random() * 1.5 + 2;
         }
 
         // Move the train
@@ -24,17 +24,17 @@ function startTrain(){
 
         train.style.right = trainPosition + "px";
 
-        // Wait until the train has fully gone off the left side
+        // Once the train has completely left the screen,
+        // bring it back instantly from the right
         if(trainPosition > window.innerWidth + 350){
 
-            // Bring it back to the right side
             trainPosition = -350;
 
-            // Give it a new speed
-            trainSpeed = Math.random() * 2 + 3;
+            // New natural speed
+            trainSpeed = Math.random() * 1.5 + 2;
         }
 
-    }, 25);
+    }, 30);
 }
 
 
