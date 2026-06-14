@@ -1,14 +1,11 @@
-// Train movement system
-
 let trainPosition = -350;
 let trainTimer;
 
-// Start train movement
 function startTrain(){
 
     let train = document.getElementById("movingTrain");
 
-    // Reset train to right side
+    // Put train back at the right side
     trainPosition = -350;
     train.style.right = trainPosition + "px";
 
@@ -20,18 +17,16 @@ function startTrain(){
 
         train.style.right = trainPosition + "px";
 
-        // Stop after crossing the screen
+        // Stop when it has crossed the screen
         if(trainPosition > window.innerWidth + 400){
-
             clearInterval(trainTimer);
-
         }
 
     }, 30);
 }
 
 
-// Stop train movement
+// Stop the train during accident
 function stopTrain(){
 
     clearInterval(trainTimer);
