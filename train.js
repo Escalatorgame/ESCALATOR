@@ -1,5 +1,5 @@
 let trainPosition = -350;
-let trainTop = 20.8;
+let trainTop = 20.2;
 let trainTimer;
 let trainSpeed = 2.5;
 
@@ -9,7 +9,7 @@ function startTrain(){
 
     // Start position
     trainPosition = -350;
-    trainTop = 20.8;
+    trainTop = 20.2;
 
     train.style.right = trainPosition + "px";
     train.style.top = trainTop + "%";
@@ -35,7 +35,7 @@ function startTrain(){
 
             // Bring it back immediately from the right side
             trainPosition = -350;
-            trainTop = 20.8;
+            trainTop = 20.2;
 
             train.style.right = trainPosition + "px";
             train.style.top = trainTop + "%";
