@@ -1,6 +1,6 @@
 let trainPosition = -350;
 let trainTimer;
-let trainSpeed = 8;
+let trainSpeed = 2.5;
 
 function startTrain(){
 
@@ -13,26 +13,26 @@ function startTrain(){
 
     trainTimer = setInterval(function(){
 
-        // Randomly change speed sometimes
-        if(Math.random() < 0.08){
-            trainSpeed = Math.random() * 12 + 3;
+        // Sometimes slightly change speed
+        if(Math.random() < 0.03){
+            trainSpeed = Math.random() * 2 + 1;
         }
 
-        // Move train
+        // Move train slowly
         trainPosition += trainSpeed;
 
         train.style.right = trainPosition + "px";
 
-        // Immediately come back from the right
+        // Immediately appear from the right again
         if(trainPosition >= window.innerWidth - 200){
 
             trainPosition = -350;
 
-            // Give a new random speed every time it returns
-            trainSpeed = Math.random() * 12 + 3;
+            // New slow random speed
+            trainSpeed = Math.random() * 2 + 1;
         }
 
-    }, 25);
+    }, 30);
 }
 
 
