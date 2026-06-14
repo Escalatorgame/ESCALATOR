@@ -26,17 +26,14 @@ function startTrain(){
         // Move train from right to left
         trainPosition += trainSpeed;
 
-        // Move downward more noticeably (about 2 inches by the end)
-        trainTop += 0.012;
-
-        // Apply movement
+        // Keep the train on the same straight line
         train.style.right = trainPosition + "px";
         train.style.top = trainTop + "%";
 
         // When it leaves the left side
         if(trainPosition >= window.innerWidth - 20){
 
-            // Return to right side at original height
+            // Return immediately to the right side at the same height
             trainPosition = -350;
             trainTop = 18.5;
 
