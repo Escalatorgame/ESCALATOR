@@ -1,11 +1,12 @@
 let trainPosition = -350;
 let trainTimer;
-let trainSpeed = 2.5;
+let trainSpeed = 4;
 
 function startTrain(){
 
     let train = document.getElementById("movingTrain");
 
+    // Start from the right side
     trainPosition = -350;
     train.style.right = trainPosition + "px";
 
@@ -13,26 +14,27 @@ function startTrain(){
 
     trainTimer = setInterval(function(){
 
-        // Sometimes slightly change speed
+        // Small random speed changes
         if(Math.random() < 0.03){
-            trainSpeed = Math.random() * 2 + 1;
+            trainSpeed = Math.random() * 2 + 3;
         }
 
-        // Move train slowly
+        // Move the train
         trainPosition += trainSpeed;
 
         train.style.right = trainPosition + "px";
 
-        // Immediately appear from the right again
-        if(trainPosition >= window.innerWidth - 200){
+        // Wait until the train has fully gone off the left side
+        if(trainPosition > window.innerWidth + 350){
 
+            // Bring it back to the right side
             trainPosition = -350;
 
-            // New slow random speed
-            trainSpeed = Math.random() * 2 + 1;
+            // Give it a new speed
+            trainSpeed = Math.random() * 2 + 3;
         }
 
-    }, 30);
+    }, 25);
 }
 
 
