@@ -434,10 +434,11 @@ multiplier = 1;
 
 
         // Train accident
-        if(multiplier >= crashPoint){
+       if(multiplier >= crashPoint){
 
+    stopTrain();
 
-            clearInterval(timer);
+    clearInterval(timer);
 
 
             running = false;
