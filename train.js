@@ -7,7 +7,7 @@ function startTrain(){
 
     let train = document.getElementById("movingTrain");
 
-    // Start from right side and original height
+    // Start position
     trainPosition = -350;
     trainTop = 18.5;
 
@@ -18,41 +18,38 @@ function startTrain(){
 
     trainTimer = setInterval(function(){
 
-        // Slight natural speed changes
+        // Natural speed changes
         if(Math.random() < 0.02){
             trainSpeed = Math.random() * 1 + 2;
         }
 
-        // Move train to the left
+        // Move train from right to left
         trainPosition += trainSpeed;
 
-        // Slowly move train downward
-        trainTop += 0.005;
+        // Move downward more noticeably (about 2 inches by the end)
+        trainTop += 0.012;
 
         // Apply movement
         train.style.right = trainPosition + "px";
         train.style.top = trainTop + "%";
 
-        // When train leaves the left side,
-        // bring it back instantly from the right
+        // When it leaves the left side
         if(trainPosition >= window.innerWidth - 20){
 
+            // Return to right side at original height
             trainPosition = -350;
             trainTop = 18.5;
 
             train.style.right = trainPosition + "px";
             train.style.top = trainTop + "%";
 
-            // New natural speed
+            // New random speed
             trainSpeed = Math.random() * 1 + 2;
         }
 
     }, 30);
 }
 
-
 function stopTrain(){
-
     clearInterval(trainTimer);
-
 }
