@@ -393,9 +393,11 @@ function startGame(){
     if(running) return;
 
 
-    running = true;
+   running = true;
 
-    multiplier = 1;
+startTrain();
+
+multiplier = 1;
 
     crashPoint = generateCrashPoint();
 
@@ -448,8 +450,10 @@ function startGame(){
             "0 0 25px red";
 
 
-            // Show 🚂💥 immediately
-            train.style.display = "block";
+           // Show 🚂💥 immediately
+train.style.display = "block";
+
+stopTrain();
 
 
             // Keep accident display for 6 seconds
