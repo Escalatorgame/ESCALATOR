@@ -1,5 +1,5 @@
 let trainPosition = -350;
-let trainTop = 18.5;
+let trainTop = 18.3;
 let trainTimer;
 let trainSpeed = 2.5;
 
@@ -9,7 +9,7 @@ function startTrain(){
 
     // Start position
     trainPosition = -350;
-    trainTop = 18.5;
+    trainTop = 18.3;
 
     train.style.right = trainPosition + "px";
     train.style.top = trainTop + "%";
@@ -26,21 +26,21 @@ function startTrain(){
         // Move train from right to left
         trainPosition += trainSpeed;
 
-        // Keep the train on the same straight line
+        // Keep train moving in a straight line
         train.style.right = trainPosition + "px";
         train.style.top = trainTop + "%";
 
-        // When it leaves the left side
+        // When train leaves the left side
         if(trainPosition >= window.innerWidth - 20){
 
-            // Return immediately to the right side at the same height
+            // Bring it back immediately from the right side
             trainPosition = -350;
-            trainTop = 18.5;
+            trainTop = 18.3;
 
             train.style.right = trainPosition + "px";
             train.style.top = trainTop + "%";
 
-            // New random speed
+            // Give a new natural speed
             trainSpeed = Math.random() * 1 + 2;
         }
 
