@@ -409,9 +409,11 @@ function startGame(){
     if(running) return;
 
 
-   running = true;
+  running = true;
 
 startTrain();
+
+document.getElementById("movingTrain").style.display = "block";
 
 multiplier = 1;
 
@@ -452,9 +454,11 @@ document.getElementById("accidentTrain");
         // Train accident
        if(multiplier >= crashPoint){
 
-    stopTrain();
+   stopTrain();
 
-    clearInterval(timer);
+document.getElementById("movingTrain").style.display = "none";
+
+clearInterval(timer);
 
 
             running = false;
