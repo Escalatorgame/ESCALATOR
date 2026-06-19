@@ -40,6 +40,19 @@ body{
     z-index:100;
 }
 
+/* Player Balance */
+.balance{
+    position:absolute;
+    top:3%;
+    right:5%;
+    color:#ffb300;
+    font-size:22px;
+    font-weight:bold;
+    z-index:100;
+    cursor:pointer;
+    text-shadow:0 0 10px #000;
+}
+
 /* Multiplier */
 .multiplier{
     position:absolute;
@@ -212,12 +225,15 @@ class="game-image">
 
 <a href="index.html" class="back-button"></a>
 
+<!-- Player Balance -->
+<div class="balance" id="balance">
+0.00 NGN
+</div>
 
 <!-- Multiplier -->
 <div class="multiplier" id="multiplier">
 1.00x
 </div>
-
 
 <!-- Train crash -->
 <div class="train-crash" id="trainCrash">
