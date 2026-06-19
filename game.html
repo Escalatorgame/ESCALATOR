@@ -290,8 +290,7 @@ inputmode="decimal">
 
 
 <!-- Bet area -->
-<button class="bet-button"></button>
-
+<button class="bet-button" id="betButton"></button>
 
 </div>
 
@@ -525,6 +524,20 @@ window.onload = function(){
 
     updateBet();
     startGame();
+
+    document.getElementById("betButton").onclick = function(){
+
+        if(balance < bet){
+
+            alert("Insufficient Funds");
+
+            return;
+
+        }
+
+        alert("Bet Accepted");
+
+    };
 
     document.getElementById("amount").oninput = function(){
 
