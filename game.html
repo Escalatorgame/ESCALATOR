@@ -298,11 +298,11 @@ inputmode="decimal">
 <script>
 
 let bet = 50;
+let balance = 0;
 let multiplier = 1;
 let running = false;
 let timer;
 let crashPoint = 1;
-
 
 // Update all bet displays
 
@@ -313,6 +313,9 @@ function updateBet(){
 
     document.getElementById("betNGN").innerText =
     bet.toFixed(2) + " NGN";
+
+    document.getElementById("balance").innerText =
+    balance.toFixed(2) + " NGN";
 
 }
 
