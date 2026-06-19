@@ -525,19 +525,26 @@ window.onload = function(){
     updateBet();
     startGame();
 
-    document.getElementById("betButton").onclick = function(){
+   document.getElementById("betButton").onclick = function(){
 
-        if(balance < bet){
+    if(balance < bet){
 
-            alert("Insufficient Funds");
+        let deposit = confirm(
+        "Insufficient Funds\n\nClick OK to Deposit");
 
-            return;
+        if(deposit){
+
+            window.location.href = "balance.html";
 
         }
 
-        alert("Bet Accepted");
+        return;
 
-    };
+    }
+
+    alert("Bet Accepted");
+
+};
 
     document.getElementById("amount").oninput = function(){
 
