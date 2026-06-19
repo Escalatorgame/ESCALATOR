@@ -1,1 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESCALATOR WALLET</title>
+<style>
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#000;
+    color:white;
+    font-family:Arial, sans-serif;
+}
+
+.container{
+    width:100%;
+    min-height:100vh;
+    text-align:center;
+    padding-top:40px;
+}
+
+/* ESCALATOR Title */
+.title{
+    color:#ffb300;
+    font-size:32px;
+    font-weight:bold;
+    text-shadow:0 0 15px #ffb300;
+}
+
+/* Balance Display */
+.balance-display{
+    margin-top:25px;
+    color:#ffb300;
+    font-size:28px;
+    font-weight:bold;
+    text-shadow:0 0 12px #ffb300;
+}
+
+/* Wallet Box */
+.wallet-box{
+    margin-top:35px;
+}
+
+/* Amount Input */
+.amount-input{
+    width:230px;
+    height:55px;
+    border:none;
+    border-radius:12px;
+    outline:none;
+    text-align:center;
+    font-size:22px;
+    font-weight:bold;
+}
+
+/* Deposit Button */
+.deposit-button{
+    margin-top:20px;
+    width:230px;
+    height:55px;
+    border:none;
+    border-radius:30px;
+    background:#ffb300;
+    color:#000;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Withdraw Button */
+.withdraw-button{
+    margin-top:15px;
+    width:230px;
+    height:55px;
+    border:none;
+    border-radius:30px;
+    background:#007bff;
+    color:white;
+    font-size:22px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Message Display */
+.message{
+    margin-top:20px;
+    font-size:18px;
+    font-weight:bold;
+    height:25px;
+}
+
+/* Quick Amount Buttons */
+.quick-box{
+    margin-top:30px;
+}
+
+.quick{
+    width:90px;
+    height:45px;
+    margin:8px;
+    border:none;
+    border-radius:15px;
+    background:#222;
+    color:#ffb300;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Back Button */
+.back-button{
+    margin-top:35px;
+    width:170px;
+    height:50px;
+    border:none;
+    border-radius:25px;
+    background:#444;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+<div class="title">
+ESCALATOR GAME
+</div>
+<div class="balance-display" id="balanceDisplay">
+Balance: 0.00 NGN
+</div>
+
+<div class="wallet-box">
+
+<input 
+type="number"
+class="amount-input"
+id="amount"
+placeholder="Enter Amount">
+
+<br>
+
+<button class="deposit-button" id="depositButton">
+Deposit
+</button>
+<br>
+<button class="withdraw-button" id="withdrawButton">
+Withdraw
+</button>
+</div>
+<div class="message" id="message">
+</div>
+<div class="quick-box">
+<button class="quick" onclick="setAmount(100)">
+₦100
+</button>
+<button class="quick" onclick="setAmount(500)">
+₦500
+</button>
+<br>
+<button class="quick" onclick="setAmount(1000)">
+₦1000
+</button>
+<button class="quick" onclick="setAmount(5000)">
+₦5000
+</button>
+</div>
+<button class="back-button" onclick="goBack()">
+Back To Game
+</button>
+</div>
+<script>
+
+let balance = localStorage.getItem("balance");
+
+if(balance === null){
+    balance = 0;
+}else{
+    balance = parseFloat(balance);
+}
+
+// Update balance display
+function updateBalance(){
+
+    document.getElementById("balanceDisplay").innerText =
+    "Balance: " + balance.toFixed(2) + " NGN";
+
+    localStorage.setItem("balance", balance);
+}
+
+// Quick amount buttons
+function setAmount(amount){
+
+    document.getElementById("amount").value = amount;
+
+}
+
+// Deposit money
+document.getElementById("depositButton").onclick = function(){
+
+    let amount =
+    parseFloat(document.getElementById("amount").value);
+
+
+    if(isNaN(amount) || amount <= 0){
+
+        document.getElementById("message").innerText =
+        "Enter a valid amount";
+
+        return;
+    }
+
+
+    balance += amount;
+
+    updateBalance();
+
+
+    document.getElementById("message").innerText =
+    "Deposit Successful ✅";
+
+
+    document.getElementById("amount").value = "";
+
+};
+
+
+// Withdraw money
+document.getElementById("withdrawButton").onclick = function(){
+
+    let amount =
+    parseFloat(document.getElementById("amount").value);
+
+
+    if(isNaN(amount) || amount <= 0){
+
+        document.getElementById("message").innerText =
+        "Enter a valid amount";
+
+        return;
+    }
+
+
+    if(amount > balance){
+
+        document.getElementById("message").innerText =
+        "Insufficient Funds ❌";
+
+        return;
+
+    }
+
+
+    balance -= amount;
+
+    updateBalance();
+
+
+    document.getElementById("message").innerText =
+    "Withdrawal Successful ✅";
+
+
+    document.getElementById("amount").value = "";
+
+};
+
+
+// Go back to game
+function goBack(){
+
+    window.location.href = "game.html";
+
+}
+
+
+// Load balance when page opens
+updateBalance();
+
+</script>
+</body>
+</html>
